@@ -8,9 +8,17 @@
   background-color: #f3f3f3;
 }
 
-.landing h1 {
-  font-size: 2rem;
+.landing h1{
+  font-size: 2.5rem;
   font-weight: bold;
+}
+
+.landing .raisoni {
+  color: #690080; /* Raisoni color */
+}
+
+.landing .katta {
+  color: #e86f09; /* Katta color */
 }
 
 .landing p {
@@ -39,7 +47,7 @@
 .join-chat-btn {
   width: 250px;
   padding: 15px;
-  background-color: #6c63ff;
+  background-color: #690080;
   color: white;
   border: none;
   border-radius: 5px;
@@ -49,5 +57,5 @@
 }
 
 .join-chat-btn:hover {
-  background-color: #5b54d9;
+  background-color: #762b87;
 }

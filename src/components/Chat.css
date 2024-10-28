@@ -45,7 +45,7 @@
   display: inline-block;
   padding: 10px 16px;
   border-radius: 12px;
-  background-color: #615EF0; /* Message bubble background */
+  background-color: #690080; /* Message bubble background */
   color: #ffffff;
   margin-left: 10px; /* Space between sender and message text */
   font-size: 17px;
@@ -54,8 +54,8 @@
 }
 
 .message-text.partner {
-  background-color: #dcdbff; /* Partner message bubble background */
-  color: #212161; /* Partner text color */
+  background-color: #f3c5fd; /* Partner message bubble background */
+  color: #370043; /* Partner text color */
 }
 
 .input-box {
@@ -93,7 +93,7 @@
 
 .input-box button {
   width: 15%; /* Fixed width for button */
-  background-color: #6c63ff;
+  background-color: #690080;
   color: white;
   font-size: 0.9rem; /* Normal font size */
 }

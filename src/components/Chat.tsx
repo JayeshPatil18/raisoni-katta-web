@@ -36,12 +36,12 @@ const Chat: React.FC<ChatProps> = ({ campusCode }) => {
       setSysMsg(data.message || "You're now paired with a stranger.");
     });
     
-    socket.on('error', (msg) => {
+    socket.on('error', (msg: string) => {
       alert(msg);
       setIsSearching(false);
     });
 
-    socket.on('notification', (msg) => {
+    socket.on('notification', (msg: string) => {
       setSysMsg(msg); // Simplified handling of notifications
       if (msg.includes("Your chat partner has skipped")) {
         socket.emit('joinCampus', campusCode);
@@ -50,7 +50,7 @@ const Chat: React.FC<ChatProps> = ({ campusCode }) => {
       }
     });
 
-    socket.on('message', (msg) => {
+    socket.on('message', (msg: { message: string }) => {
       setChatHistory((prev) => [...prev, { sender: 'Partner', message: msg.message }]);
     });
 
@@ -94,7 +94,7 @@ const Chat: React.FC<ChatProps> = ({ campusCode }) => {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexGrow: 1 }}>
           {isConnected ? (
             <p style={{ display: 'flex', alignItems: 'center', margin: 0 }}>
-              <i className="fas fa-user-circle" style={{ marginRight: '8px', color: '#6c63ff' }}></i>
+              <i className="fas fa-user-circle" style={{ marginRight: '8px', color: '#690080' }}></i>
               {userID ? `ID: ${userID}` : 'Partner'}
             </p>
           ) : isSearching ? (
@@ -117,7 +117,7 @@ const Chat: React.FC<ChatProps> = ({ campusCode }) => {
               style={{
                 fontSize: '16px',
                 fontWeight: 'bold',
-                color: sysMsg.includes('skip') ? '#6c63ff' : '#979797' // Conditional color based on 'skip'
+                color: sysMsg.includes('skip') ? '#690080' : '#979797' // Conditional color based on 'skip'
               }}
             >
               <div dangerouslySetInnerHTML={{ __html: sysMsg.includes("Your chat partner has skipped the chat.") ? `${sysMsg}<br>Click 'New'` : sysMsg }} />

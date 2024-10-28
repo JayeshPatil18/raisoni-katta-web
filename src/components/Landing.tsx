@@ -15,7 +15,10 @@ const Landing: React.FC<LandingProps> = ({ onJoinChat }) => {
 
   return (
     <div className="landing">
-      <h1>Raisoni Katta</h1>
+      <h1>
+        <span className="raisoni">Raisoni </span>
+        <span className="katta">Katta</span>
+      </h1>
       <p>Find your perfect partner ❤️</p>
       <input
         type="text"

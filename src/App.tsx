@@ -19,13 +19,13 @@ const App: React.FC = () => {
       socket.emit('joinCampus', inputCode);
     }
 
-    socket.on('notification', (msg) => {
-      if(msg.includes(inputCode)){
+    socket.on('notification', (msg: string) => {
+      if(inputCode && msg.includes(inputCode)){
         setCampusCode(inputCode);
       }
     });
 
-    socket.on('error', (msg) => {
+    socket.on('error', (msg: string) => {
       alert(msg);
       setCampusCode(null);
     });
