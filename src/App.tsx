@@ -10,7 +10,7 @@ const App: React.FC = () => {
   const [inputCode, setInputCode] = useState<string | null>(null);
 
   const handleJoinChat = (code: string) => {
-    setInputCode(code);
+    setInputCode(code.toLowerCase().trim());
   };
 
   useEffect(() => {
