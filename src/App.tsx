@@ -5,42 +5,25 @@ import Chat from './components/Chat';
 import './App.css';
 import socket from './socket'; // Ensure this is the correct import for your socket instance
 
+// Define the static campus code
+const CAMPUS_CODE = 'ghrcem';
+
 const App: React.FC = () => {
-  const [campusCode, setCampusCode] = useState<string | null>(null);
   const [inputCode, setInputCode] = useState<string | null>(null);
 
   const handleJoinChat = (code: string) => {
-    setInputCode(code.toLowerCase().trim());
-  };
-
-  useEffect(() => {
-    // Check if inputCode is set to emit 'joinCampus'
-    if (inputCode) {
-      socket.emit('joinCampus', inputCode);
+    const formattedCode = code.toLowerCase().trim();
+    if (formattedCode === CAMPUS_CODE) {
+      setInputCode(formattedCode);
+    } else {
+      alert('Invalid campus code');
     }
-
-    socket.on('notification', (msg: string) => {
-      if(inputCode && msg.includes(inputCode)){
-        setCampusCode(inputCode);
-      }
-    });
-
-    socket.on('error', (msg: string) => {
-      alert(msg);
-      setCampusCode(null);
-    });
-
-    // Cleanup on component unmount
-    return () => {
-      socket.off('notification');
-      socket.off('error');
-    };
-  }, [inputCode]); // Monitor inputCode only for emitting and listening
+  };
 
   return (
     <div className="App">
-      {campusCode ? (
-        <Chat campusCode={campusCode} />
+      {inputCode ? (
+        <Chat campusCode={inputCode} />
       ) : (
         <Landing onJoinChat={handleJoinChat} />
       )}
