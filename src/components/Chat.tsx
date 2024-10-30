@@ -1,5 +1,5 @@
 // src/components/Chat.tsx
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './Chat.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import socket from '../socket';
@@ -16,6 +16,8 @@ const Chat: React.FC<ChatProps> = ({ campusCode }) => {
   const [userID, setUserId] = useState('');
   const [sysMsg, setSysMsg] = useState("You're now chatting with a random stranger.");
   const [skipBtnText, setSkipBtnText] = useState("Skip");
+  const [isTyping, setIsTyping] = useState(false); // Typing indicator state
+  const typingTimeoutRef = useRef<any>(null);
   const messageBoxRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -54,12 +56,22 @@ const Chat: React.FC<ChatProps> = ({ campusCode }) => {
       setChatHistory((prev) => [...prev, { sender: 'Partner', message: msg.message }]);
     });
 
+    socket.on('typing', () => {
+      setIsTyping(true);
+    });
+
+    socket.on('stopTyping', () => {
+      setIsTyping(false);
+    });
+
     // Cleanup event listeners when component unmounts
     return () => {
       socket.off('paired');
       socket.off('error');
       socket.off('notification');
       socket.off('message');
+      socket.off('typing');
+      socket.off('stopTyping');
     };
   }, [campusCode]);
 
@@ -68,6 +80,7 @@ const Chat: React.FC<ChatProps> = ({ campusCode }) => {
       setChatHistory([...chatHistory, { sender: 'You', message: chatMessage }]);
       socket.emit('message', { message: chatMessage });
       setChatMessage('');
+      socket.emit('stopTyping');
     }
   };
 
@@ -87,6 +100,14 @@ const Chat: React.FC<ChatProps> = ({ campusCode }) => {
   const handleSystemMessage = () => {
     return chatHistory.length === 0 && (sysMsg === "You're now chatting with a random stranger." || sysMsg === "You are now paired with a random user");
   };
+
+  const handleTyping = useCallback(() => {
+    socket.emit('typing');
+    clearTimeout(typingTimeoutRef.current);
+    typingTimeoutRef.current = setTimeout(() => {
+      socket.emit('stopTyping');
+    }, 1200);
+  }, []);
 
   return (
     <div className="chat">
@@ -141,6 +162,13 @@ const Chat: React.FC<ChatProps> = ({ campusCode }) => {
                 <span className={`message-text ${msg.sender === 'Partner' ? 'partner' : ''}`}>{msg.message}</span>
               </div>
             ))}
+            {isTyping && (
+  <span
+    dangerouslySetInnerHTML={{
+      __html: `\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0Typing...`
+    }}
+  />
+)}
           </>
         ) : (
           <p style={{ fontSize: '16px', fontWeight: 'bold', color: '#979797' }}>
@@ -160,6 +188,7 @@ const Chat: React.FC<ChatProps> = ({ campusCode }) => {
           onChange={(e) => setChatMessage(e.target.value)}
           disabled={!isConnected}
           onKeyDown={(e) => {
+            handleTyping();
             if (e.key === 'Enter' && isConnected) {
               handleSendMessage();
             }
