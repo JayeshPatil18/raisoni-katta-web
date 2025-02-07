@@ -1,3 +1,6 @@
+/* Latest */
+
+
 /* src/components/Chat.css */
 
 * {
@@ -18,7 +21,7 @@
   padding: 1rem;
   font-size: 1rem;
   font-weight: bold;
-  background-color: #fff;
+  background-color: #eb0085;
   text-align: center;
   border-bottom: 1px solid #ddd;
 }
@@ -45,7 +48,7 @@
   display: inline-block;
   padding: 10px 16px;
   border-radius: 12px;
-  background-color: #690080; /* Message bubble background */
+  background: linear-gradient(90deg, #eb0085, #c52933); /* Message bubble background */
   color: #ffffff;
   margin-left: 10px; /* Space between sender and message text */
   font-size: 17px;
@@ -54,7 +57,7 @@
 }
 
 .message-text.partner {
-  background-color: #f3c5fd; /* Partner message bubble background */
+  background: linear-gradient(90deg, #ff9ad3, #ff9ad3); /* Partner message bubble background */
   color: #22002a; /* Partner text color */
 }
 
@@ -99,7 +102,7 @@
 
 .input-box button {
   width: 15%; /* Fixed width for button */
-  background-color: #690080;
+  background: linear-gradient(90deg, #eb0085, #eb0085);
   color: white;
   font-size: 0.9rem; /* Normal font size */
 }

@@ -115,7 +115,7 @@ const Chat: React.FC<ChatProps> = ({ campusCode }) => {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexGrow: 1 }}>
           {isConnected ? (
             <p style={{ display: 'flex', alignItems: 'center', margin: 0 }}>
-              <i className="fas fa-user-circle" style={{ marginRight: '8px', color: '#690080' }}></i>
+              <i className="fas fa-user-circle" style={{ marginRight: '8px', color: '#FFF' }}></i>
               {userID ? `ID: ${userID}` : 'Partner'}
             </p>
           ) : isSearching ? (
