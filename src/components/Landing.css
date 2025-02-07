@@ -1,30 +1,82 @@
-/* src/components/Landing.css */
+/* Latest */
 .landing {
+  display: flex;
+  justify-content: flex-end; /* Align content to the right */
+  align-items: center; /* Center content vertically */
+  background-image: url('/src/assets/fullbg.jpg'); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+  padding-right: 5%; /* Space from the right edge */
+}
+
+.form-container {
+  padding: 80px;
+  border-radius: 10px;
+  border: 3px solid black; /* Add a black border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow */
+  text-align: center;
+  margin-right: 100px;
+  background-color: #fecddd7e;
+  animation: blink 10s infinite ease-in-out, pulse 5s infinite ease-in-out;
+}
+
+/* Size increasing and decreasing animation */
+@keyframes pulse {
+  0% {
+    transform: scale(1); /* Original size */
+  }
+  50% {
+    transform: scale(1.1); /* Slightly larger */
+  }
+  100% {
+    transform: scale(1); /* Back to original size */
+  }
+}
+
+
+@keyframes blink {
+  0% {
+    background-color: rgba(255, 255, 255, 0.359); /* Deep Pink */
+  }
+  100% {
+    background-color: rgba(255, 255, 255, 0.392); /* Deep Pink */
+  }
+}
+
+
+
+
+
+/* src/components/Landing.css */
+/* .landing {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
   background-color: #f3f3f3;
-}
+} */
 
 .landing h1{
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: bold;
 }
 
 .landing .raisoni {
-  color: #690080; /* Raisoni color */
+  color: #af0063; /* Raisoni color */
 }
 
 .landing .katta {
-  color: #e86f09; /* Katta color */
+  color: #c52933; /* Katta color */
 }
 
 .landing p {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   margin-bottom: 2rem;
-  color: #555;
+  color: #7a385d;
   font-style: italic;
 }
 
@@ -47,15 +99,17 @@
 .join-chat-btn {
   width: 250px;
   padding: 15px;
-  background-color: #690080;
+  /* background-color: #eb0085; */
+  background: linear-gradient(90deg, #eb0085, #c52933);
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: bold;
+  transition: 0.3s ease;
 }
 
 .join-chat-btn:hover {
-  background-color: #762b87;
+  background: linear-gradient(90deg, #eb0085, #eb0085);
 }
